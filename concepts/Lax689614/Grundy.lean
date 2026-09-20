@@ -1,5 +1,6 @@
 import Lax689614.ArcKayles
 import Mathlib.Order.ConditionallyCompleteLattice.Basic
+import Mathlib.Order.Lattice.Nat
 
 /-!
 ---
@@ -25,6 +26,6 @@ termination_by S.card
 decreasing_by
   have h := e.property
   simp only [moves, Finset.mem_filter, Finset.mem_product] at h
-  exact lt_of_le_of_lt (Finset.card_erase_le _ _) (Finset.card_erase_lt_of_mem h.1.1)
+  exact lt_of_le_of_lt Finset.card_erase_le (Finset.card_erase_lt_of_mem h.1.1)
 
 end Lax689614.Grundy

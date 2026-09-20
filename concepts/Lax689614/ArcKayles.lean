@@ -28,9 +28,11 @@ noncomputable def moves (G : SimpleGraph V) (S : Finset V) : Finset (V × V) := 
 
 /-- Winning for the next player, by backward induction on surviving vertices. -/
 def Winning (G : SimpleGraph V) (S : Finset V) : Prop :=
-  ∃ u ∈ S, ∃ v ∈ S, G.Adj u v ∧ ¬ Winning G (remove S u v)
+  ∃ e : {e // e ∈ moves G S}, ¬ Winning G (remove S e.val.1 e.val.2)
 termination_by S.card
 decreasing_by
-  exact lt_of_le_of_lt (Finset.card_erase_le _ _) (Finset.card_erase_lt_of_mem ‹u ∈ S›)
+  have h := e.property
+  simp only [moves, Finset.mem_filter, Finset.mem_product] at h
+  exact lt_of_le_of_lt Finset.card_erase_le (Finset.card_erase_lt_of_mem h.1.1)
 
 end Lax689614.ArcKayles
