@@ -14,8 +14,9 @@ machine on binary words.
 
 ## Proof status
 
-All eleven completed proofs have empty Lax assumption sets: they use only the
-archive's allowed background axioms, not any open concept statements.
+All thirteen completed proofs have passed kernel replay and have empty Lax
+assumption sets: they use only the archive's allowed background axioms, not
+any open concept statements.
 
 | Paper result | Concept module | Status |
 | --- | --- | --- |
@@ -26,7 +27,7 @@ archive's allowed background axioms, not any open concept statements.
 | Lemma 6: biclique with private neighbors | `Biclique` | Proved, including empty sides |
 | Claim 7: deviations lose | `RegularPlay` | Proved |
 | Claim 8: exceptional move parity | `RegularPlay` | Proved |
-| Claims 9 and 10: transfer winning strategies | `Reduction` | Statements only |
+| Claims 9 and 10: transfer winning strategies | `Reduction` | Both proved |
 | Polynomial-time many-one reduction | `Reduction` | Statement only |
 | Schaefer's positive CNF hardness | `PositiveCNFHardness` | Statement only |
 | Theorem 1: membership and completeness | `Completeness` | Statements only |
@@ -63,28 +64,27 @@ requires LaTeX sources.
 
 ## Remaining proof work
 
-1. Transfer False's and True's strategies. Formalize True's final invariant:
-   even remaining `r`, odd remaining `q`, `r < q`, and a protected surviving
-   literal neighbor for each remaining clause vertex.
-2. Construct total parsers and the binary-word reduction. Duplicate a clause
-   for positive even clause counts; map empty conjunctions to a fixed winning
-   graph and invalid words to a fixed losing graph. Prove outcome preservation
-   and supply the actual `TM2ComputableInPolyTime` witness. The size bounds
-   already proved do not by themselves establish polynomial running time.
-3. Prove positive CNF hardness from polynomial-space computation, e.g. through
+1. Supply the actual `TM2ComputableInPolyTime` witness for `reduceWord`.
+   Total formula parsing, encoding injectivity, clause duplication,
+   the empty-conjunction and invalid-word cases, winner preservation on all
+   binary words, and a quadratic output-length bound are now proved.
+   The size bound does not by itself establish polynomial running time.
+2. Prove positive CNF hardness from polynomial-space computation, e.g. through
    quantified formulas and Schaefer's strategy-preserving construction.
    Cook–Levin provides reductions and useful encodings, but NP-hardness alone
    does not supply this alternating-game argument. No corresponding archived
    QBF/positive-CNF hardness theorem was found in the local archive snapshot.
-4. Implement the polynomial-space game-tree decider in the imported
+3. Implement the polynomial-space game-tree decider in the imported
    `SpaceMachines` model and prove its work-space bound. Prove any needed
-   composition facts for polynomial reductions and assemble completeness.
-   In the pinned mathlib, `TM2ComputableInPolyTime.comp` is marked
-   `proof_wanted`; it must not be treated as an available checked proof.
+   assembly of completeness. Polynomial reduction composition is supplied
+   by `Lax434930Proofs.PolynomialComposition.comp` in the registered classical
+   complexity submission; the pinned mathlib's similarly named
+   `proof_wanted` declaration is not used.
 
 These steps remain part of the requested full formalization. The present
-proof package completes the Sprague–Grundy results, the pass lemma, and the
-deviation analysis. The strategy transfer and complexity theorem remain open.
+proof package completes the Sprague–Grundy results, the pass lemma, the
+deviation analysis, and both strategy transfers, including True's endgame.
+The complexity theorem remains open.
 
 ## Validation and preview
 
@@ -100,8 +100,7 @@ lax serve .
 statements, proofs, and exact computed assumption sets. No remote publication
 is needed for local validation and preview.
 
-Validation on 2026-09-21: `lax build .` passed with 14 concepts and eleven
-proofs, all with empty computed assumption sets. Kernel replay previously
-passed for the first eight proofs; replay of the newer proofs is pending.
-There are six open statements. The manuscript's SHA-256 is
+Validation on 2026-09-21: `lax build . --replay` passed with 14 concepts and
+thirteen proofs, all with empty computed assumption sets. This includes
+both strategy-transfer proofs. There are four open statements. The manuscript's SHA-256 is
 `94517c7d6ac1909f101e8485a0eb53fc0c7da415b8496c2950e532cea63b8ad0`.

@@ -15,3 +15,9 @@ path = "../concepts"
 
 [[lean_lib]]
 name = "Lax689614Proofs"
+
+[[require]]
+name = "Lax434930Proofs"
+git = "https://github.com/EdouardBonnet/classical-complexity"
+rev = "0c0840319318215fd7b36a9a822b81ce55cf6941"
+subDir = "proofs"
