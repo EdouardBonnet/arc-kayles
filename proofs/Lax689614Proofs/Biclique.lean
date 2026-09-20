@@ -94,37 +94,37 @@ theorem count_after_move {V : Type} [DecidableEq V] (G : SimpleGraph V)
     have hvL : v ∉ L := fun hh => hLR hh hvR
     right; right
     refine ⟨Finset.card_pos.mpr ⟨u, huL⟩, Finset.card_pos.mpr ⟨v, hvR⟩, ?_⟩
-    simp [remove, Finset.card_erase_eq_ite, huL, huR, hvL, hvR, huv, hvu]
+    simp_all [remove]
   · have huR : u ∉ R := hLR huL
     have hvL : v ∉ L := fun hh => hLI hh hvI
     have hvR : v ∉ R := fun hh => hRI hh hvI
     left
     refine ⟨Finset.card_pos.mpr ⟨u, huL⟩, ?_⟩
-    simp [remove, Finset.card_erase_eq_ite, huL, huR, hvL, hvR, huv, hvu]
+    simp_all [remove]
   · have huL : u ∉ L := fun hh => hLR hh huR
     have hvR : v ∉ R := hLR hvL
     right; right
     refine ⟨Finset.card_pos.mpr ⟨v, hvL⟩, Finset.card_pos.mpr ⟨u, huR⟩, ?_⟩
-    simp [remove, Finset.card_erase_eq_ite, huL, huR, hvL, hvR, huv, hvu]
+    simp_all [remove]
   · exact False.elim (h.right_stable u huR v hvR he)
   · have huL : u ∉ L := fun hh => hLR hh huR
     have hvL : v ∉ L := fun hh => hLI hh hvI
     have hvR : v ∉ R := fun hh => hRI hh hvI
     right; left
     refine ⟨Finset.card_pos.mpr ⟨u, huR⟩, ?_⟩
-    simp [remove, Finset.card_erase_eq_ite, huL, huR, hvL, hvR, huv, hvu]
+    simp_all [remove]
   · have huL : u ∉ L := fun hh => hLI hh huI
     have huR : u ∉ R := fun hh => hRI hh huI
     have hvR : v ∉ R := hLR hvL
     left
     refine ⟨Finset.card_pos.mpr ⟨v, hvL⟩, ?_⟩
-    simp [remove, Finset.card_erase_eq_ite, huL, huR, hvL, hvR, huv, hvu]
+    simp_all [remove]
   · have huL : u ∉ L := fun hh => hLI hh huI
     have huR : u ∉ R := fun hh => hRI hh huI
     have hvL : v ∉ L := fun hh => hLR hh hvR
     right; left
     refine ⟨Finset.card_pos.mpr ⟨v, hvR⟩, ?_⟩
-    simp [remove, Finset.card_erase_eq_ite, huL, huR, hvL, hvR, huv, hvu]
+    simp_all [remove]
   · exact False.elim (h.independent_stable u huI v hvI he)
 
 theorem count_option_realized {V : Type} [DecidableEq V] (G : SimpleGraph V)
@@ -145,21 +145,21 @@ theorem count_option_realized {V : Type} [DecidableEq V] (G : SimpleGraph V)
     have hvL : v ∉ L := fun hh => hLI hh hvI
     have hvR : v ∉ R := fun hh => hRI hh hvI
     refine ⟨u, hLS huL, v, hIS hvI, he, ?_⟩
-    simp [remove, Finset.card_erase_eq_ite, huL, huR, hvL, hvR]
+    simp_all [remove]
   · obtain ⟨u, huR⟩ := Finset.card_pos.mp hb
     obtain ⟨v, hvI, he, _⟩ := h.pendant u (Finset.mem_union_right L huR)
     have huL : u ∉ L := fun hh => hLR hh huR
     have hvL : v ∉ L := fun hh => hLI hh hvI
     have hvR : v ∉ R := fun hh => hRI hh hvI
     refine ⟨u, hRS huR, v, hIS hvI, he, ?_⟩
-    simp [remove, Finset.card_erase_eq_ite, huL, huR, hvL, hvR]
+    simp_all [remove]
   · obtain ⟨u, huL⟩ := Finset.card_pos.mp ha
     obtain ⟨v, hvR⟩ := Finset.card_pos.mp hb
     have huR : u ∉ R := hLR huL
     have hvL : v ∉ L := fun hh => hLR hh hvR
     have hvu : v ≠ u := by intro hh; subst v; exact huR hvR
     refine ⟨u, hLS huL, v, hRS hvR, h.complete u huL v hvR, ?_⟩
-    simp [remove, Finset.card_erase_eq_ite, huL, huR, hvL, hvR, hvu]
+    simp_all [remove]
 
 /--
 ---

@@ -2,3 +2,15 @@ import Lax689614Proofs.Grundy
 import Lax689614Proofs.Biclique
 import Lax689614Proofs.DisjointUnion
 import Lax689614Proofs.Sizes
+import Lax689614Proofs.PositiveCNF
+import Lax689614Proofs.Passes
+import Lax689614Proofs.Vertices
+import Lax689614Proofs.Relabeling
+import Lax689614Proofs.RegularPositions
+import Lax689614Proofs.ResidualValues
+import Lax689614Proofs.ExceptionalMove
+import Lax689614Proofs.ProtectedPositions
+import Lax689614Proofs.CentralResponses
+import Lax689614Proofs.ClauseDeviations
+import Lax689614Proofs.ClauseReplies
+import Lax689614Proofs.Deviations
