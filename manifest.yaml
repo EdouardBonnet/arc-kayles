@@ -24,3 +24,12 @@ bibEntries:
       year = {1978},
       doi = {10.1016/0022-0000(78)90045-4}
     }
+  - |
+    @techreport{byskov2004,
+      author = {Jesper Makholm Byskov},
+      title = {Maker-Maker and Maker-Breaker Games are PSPACE-Complete},
+      institution = {BRICS, University of Aarhus},
+      number = {RS-04-14},
+      year = {2004},
+      url = {https://www.brics.dk/RS/04/14/BRICS-RS-04-14.pdf}
+    }

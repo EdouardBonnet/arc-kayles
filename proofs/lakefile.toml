@@ -21,3 +21,9 @@ name = "Lax434930Proofs"
 git = "https://github.com/EdouardBonnet/classical-complexity"
 rev = "0c0840319318215fd7b36a9a822b81ce55cf6941"
 subDir = "proofs"
+
+[[require]]
+name = "Lax429075Proofs"
+git = "https://github.com/EdouardBonnet/cook-levin"
+rev = "905f2da2698d5b38002676f74632aa716e731389"
+subDir = "proofs"

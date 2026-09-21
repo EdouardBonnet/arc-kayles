@@ -70,6 +70,13 @@ requires LaTeX sources.
    Cook–Levin provides reductions and useful encodings, but NP-hardness alone
    does not supply this alternating-game argument. No corresponding archived
    QBF/positive-CNF hardness theorem was found in the local archive snapshot.
+   The auxiliary proof now includes a size-controlled quantified reachability
+   construction, a truth-preserving conversion to quantified CNF using the
+   pinned Cook–Levin circuit proofs, and Byskov's full strategy-preserving
+   reduction from alternating quantified CNF to the True-first positive CNF
+   game. Its round proof handles all deviations and composes across rounds.
+   Connecting polynomial-space configurations to these formulas and compiling
+   the remaining word transformations are still required for PSPACE-hardness.
 2. Assemble completeness from positive CNF hardness, the proved reduction,
    and the proved PSPACE membership. Polynomial reduction composition is supplied
    by `Lax434930Proofs.PolynomialComposition.comp` in the registered classical
