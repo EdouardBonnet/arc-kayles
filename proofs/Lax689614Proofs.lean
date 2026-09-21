@@ -37,3 +37,17 @@ import Lax689614Proofs.GraphCode
 import Lax689614Proofs.NormalizeCode
 import Lax689614Proofs.HeaderCode
 import Lax689614Proofs.ReductionTime
+import Lax689614Proofs.GraphParser
+import Lax689614Proofs.GameEvaluation
+import Lax689614Proofs.DepthFirst
+import Lax689614Proofs.ProgramSpace
+import Lax689614Proofs.DepthFirstSpace
+import Lax689614Proofs.FrameDecoding
+import Lax689614Proofs.TransitionWords
+import Lax689614Proofs.TransitionCode
+import Lax689614Proofs.CodeStepper
+import Lax689614Proofs.GraphHeader
+import Lax689614Proofs.GraphValidationCode
+import Lax689614Proofs.InputCapture
+import Lax689614Proofs.DriverTrace
+import Lax689614Proofs.Membership

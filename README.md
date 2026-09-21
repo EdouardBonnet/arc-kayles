@@ -14,7 +14,7 @@ machine on binary words.
 
 ## Proof status
 
-All fourteen completed proofs have passed kernel replay and have empty Lax
+All fifteen completed proofs have passed kernel replay and have empty Lax
 assumption sets: they use only the archive's allowed background axioms, not
 any open concept statements.
 
@@ -30,7 +30,8 @@ any open concept statements.
 | Claims 9 and 10: transfer winning strategies | `Reduction` | Both proved |
 | Polynomial-time many-one reduction | `Reduction` | Proved with a compiled Turing-machine witness |
 | Schaefer's positive CNF hardness | `PositiveCNFHardness` | Statement only |
-| Theorem 1: membership and completeness | `Completeness` | Statements only |
+| Theorem 1: PSPACE membership | `Completeness` | Proved with a compiled, halting work-space machine |
+| Theorem 1: PSPACE completeness | `Completeness` | Awaiting positive CNF hardness |
 | Exact encoding lengths and reduction vertex count | `Sizes` | All three proved |
 
 Concept axioms are the archive's mechanism for declaring proof obligations.
@@ -69,9 +70,8 @@ requires LaTeX sources.
    Cook–Levin provides reductions and useful encodings, but NP-hardness alone
    does not supply this alternating-game argument. No corresponding archived
    QBF/positive-CNF hardness theorem was found in the local archive snapshot.
-2. Implement the polynomial-space game-tree decider in the imported
-   `SpaceMachines` model and prove its work-space bound. Prove any needed
-   assembly of completeness. Polynomial reduction composition is supplied
+2. Assemble completeness from positive CNF hardness, the proved reduction,
+   and the proved PSPACE membership. Polynomial reduction composition is supplied
    by `Lax434930Proofs.PolynomialComposition.comp` in the registered classical
    complexity submission; the pinned mathlib's similarly named
    `proof_wanted` declaration is not used.
@@ -81,8 +81,12 @@ proof package completes the Sprague–Grundy results, the pass lemma, the
 deviation analysis, and both strategy transfers, including True's endgame.
 The binary-word reduction also has a genuine polynomial-time machine
 witness, compiled from header validation, clause normalization, and matrix
-generation. The PSPACE membership and positive-CNF hardness proofs remain
-open; completeness will then follow by the proved reduction-composition lemma.
+generation. PSPACE membership is also proved: a validated graph is evaluated
+by a terminating depth-first search with a cubically bounded encoded stack.
+Each transition is compiled, its temporary workspace is cleared, and the
+archived stack-to-tape compiler supplies a deterministic machine with a
+polynomial work-space bound. Positive-CNF hardness remains open; completeness
+will then follow by the proved reduction-composition lemma.
 
 ## Validation and preview
 
@@ -99,7 +103,7 @@ statements, proofs, and exact computed assumption sets. No remote publication
 is needed for local validation and preview.
 
 Validation on 2026-09-21: `lax build . --replay` passed with 14 concepts and
-fourteen proofs, all with empty computed assumption sets. This includes
-both strategy transfers and the polynomial-time reduction. There are three
+fifteen proofs, all with empty computed assumption sets. This includes
+both strategy transfers, the polynomial-time reduction, and PSPACE membership. There are two
 open statements. The manuscript's SHA-256 is
 `94517c7d6ac1909f101e8485a0eb53fc0c7da415b8496c2950e532cea63b8ad0`.
