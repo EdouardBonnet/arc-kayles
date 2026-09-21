@@ -1,9 +1,8 @@
 # Arc Kayles is PSPACE-complete
 
 Local Lax submission **lax-689614**, based on Édouard Bonnet's manuscript
-`../main.pdf`. This is work in progress. The PSPACE-completeness theorem is
-stated but **not yet proved**. Nothing has been submitted to the remote archive
-or registered.
+`../main.pdf`. All theorem statements, including PSPACE-completeness, have
+Lean proofs. Nothing has been submitted to the remote archive or registered.
 
 The submission uses the registered, pinned concept packages
 [classical complexity, lax-434930](https://github.com/EdouardBonnet/classical-complexity/tree/0c0840319318215fd7b36a9a822b81ce55cf6941)
@@ -14,9 +13,10 @@ machine on binary words.
 
 ## Proof status
 
-All fifteen completed proofs have passed kernel replay and have empty Lax
-assumption sets: they use only the archive's allowed background axioms, not
-any open concept statements.
+All seventeen proofs have passed full Lax validation and independent kernel
+replay, with empty computed assumption sets. There are no open theorem
+statements. The final hardness and completeness proofs use only `propext`,
+`Classical.choice`, and `Quot.sound`.
 
 | Paper result | Concept module | Status |
 | --- | --- | --- |
@@ -29,9 +29,9 @@ any open concept statements.
 | Claim 8: exceptional move parity | `RegularPlay` | Proved |
 | Claims 9 and 10: transfer winning strategies | `Reduction` | Both proved |
 | Polynomial-time many-one reduction | `Reduction` | Proved with a compiled Turing-machine witness |
-| Schaefer's positive CNF hardness | `PositiveCNFHardness` | Statement only |
+| Schaefer's positive CNF hardness | `PositiveCNFHardness` | Proved via compiled quantified reachability and Byskov's game reduction |
 | Theorem 1: PSPACE membership | `Completeness` | Proved with a compiled, halting work-space machine |
-| Theorem 1: PSPACE completeness | `Completeness` | Awaiting positive CNF hardness |
+| Theorem 1: PSPACE completeness | `Completeness` | Proved |
 | Exact encoding lengths and reduction vertex count | `Sizes` | All three proved |
 
 Concept axioms are the archive's mechanism for declaring proof obligations.
@@ -63,43 +63,51 @@ The folder contains only a source PDF, not the author's LaTeX sources. No
 `paper` entry is declared in the manifest, since Lax's paper integration
 requires LaTeX sources.
 
-## Remaining proof work
+## Proof architecture
 
-1. Prove positive CNF hardness from polynomial-space computation, e.g. through
-   quantified formulas and Schaefer's strategy-preserving construction.
-   Cook–Levin provides reductions and useful encodings, but NP-hardness alone
-   does not supply this alternating-game argument. No corresponding archived
-   QBF/positive-CNF hardness theorem was found in the local archive snapshot.
-   The auxiliary proof now includes a size-controlled quantified reachability
-   construction, a truth-preserving conversion to quantified CNF using the
-   pinned Cook–Levin circuit proofs, and Byskov's full strategy-preserving
-   reduction from alternating quantified CNF to the True-first positive CNF
-   game. Its round proof handles all deviations and composes across rounds.
-   Block-quantifier normalization and the complete closed-QBF-to-game semantic
-   translation are also proved. The alternating-CNF-to-positive-CNF binary
-   reduction has a compiled polynomial-time Turing-machine witness, including
-   malformed-input handling. Encoded machine configurations are now connected
-   to the quantified formulas: `machineFormula_positive` proves that an
-   arbitrary space-bounded machine accepts exactly when the resulting game
-   is winning. Compiling this source-to-formula transformation with a
-   polynomial-time certificate is still required for PSPACE-hardness.
-2. Assemble completeness from positive CNF hardness, the proved reduction,
-   and the proved PSPACE membership. Polynomial reduction composition is supplied
-   by `Lax434930Proofs.PolynomialComposition.comp` in the registered classical
-   complexity submission; the pinned mathlib's similarly named
-   `proof_wanted` declaration is not used.
+Positive-CNF hardness is proved from the archived definition of PSPACE, not
+assumed from a citation. A polynomial-space machine's configuration graph is
+encoded by a uniformly generated circuit. Quantified repeated squaring uses
+one recursive reachability instance per level; explicit alignment constraints
+select either half of the path. The circuit has a checked quantifier layout
+and wire bounds. The pinned Cook–Levin gate proofs convert it to quantified
+CNF, and block-quantifier normalization gives an alternating-CNF game.
 
-These steps remain part of the requested full formalization. The present
-proof package completes the Sprague–Grundy results, the pass lemma, the
-deviation analysis, and both strategy transfers, including True's endgame.
-The binary-word reduction also has a genuine polynomial-time machine
-witness, compiled from header validation, clause normalization, and matrix
-generation. PSPACE membership is also proved: a validated graph is evaluated
-by a terminating depth-first search with a cubically bounded encoded stack.
-Each transition is compiled, its temporary workspace is cleared, and the
-archived stack-to-tape compiler supplies a deterministic machine with a
-polynomial work-space bound. Positive-CNF hardness remains open; completeness
-will then follow by the proved reduction-composition lemma.
+Byskov's strategy-preserving gadgets convert that game to True-first positive
+CNF. Their proofs handle every deviation, not only intended play. Both the
+machine-to-alternating-CNF and alternating-CNF-to-positive-CNF word maps have
+compiled polynomial-time Turing-machine witnesses. The former includes a
+verified traversal of the archived CNF encoding; the latter handles malformed
+input words as well as valid formulas.
+
+The paper's Arc Kayles reduction is proved through the Sprague–Grundy results,
+the pass lemma, the deviation analysis, and both strategy transfers, including
+True's endgame. Its word map likewise has a polynomial-time machine witness,
+compiled from header validation, clause normalization, and adjacency-matrix
+generation.
+
+PSPACE membership uses a terminating depth-first search with a cubically
+bounded encoded stack. Each transition is compiled, its temporary workspace
+is cleared, and the archived stack-to-tape compiler supplies a deterministic
+machine with a polynomial work-space bound.
+
+The final completeness proof composes these results using
+`Lax434930Proofs.PolynomialComposition.comp`. The pinned mathlib's similarly
+named `proof_wanted` declaration and unproved archived concept statements are
+not used as proof dependencies.
+
+Review entry points:
+
+- [Positive-CNF hardness](proofs/Lax689614Proofs/PositiveCNFHardness.lean)
+- [Compiled source reduction](proofs/Lax689614Proofs/SpaceReductionCode.lean)
+- [Quantified machine-CNF correctness](proofs/Lax689614Proofs/MachineCNF.lean)
+- [Arc Kayles completeness](proofs/Lax689614Proofs/Completeness.lean)
+
+The build's advisory warnings concern proof-package dependencies and unused
+helpers (including generated constructor lemmas). Proof-package dependencies
+are intentional: they reuse the archived compiler and circuit proofs. The
+separate closed-QBF semantic construction and size lemmas are retained for
+review even where the final uniform compiler uses its numeric counterpart.
 
 ## Validation and preview
 
@@ -116,7 +124,7 @@ statements, proofs, and exact computed assumption sets. No remote publication
 is needed for local validation and preview.
 
 Validation on 2026-09-21: `lax build . --replay` passed with 14 concepts and
-fifteen proofs, all with empty computed assumption sets. This includes
-both strategy transfers, the polynomial-time reduction, and PSPACE membership. There are two
-open statements. The manuscript's SHA-256 is
+17 proofs, all with empty computed assumption sets. The build reports 139
+advisory warnings of the kinds explained above, and no errors.
+The manuscript's SHA-256 is
 `94517c7d6ac1909f101e8485a0eb53fc0c7da415b8496c2950e532cea63b8ad0`.
