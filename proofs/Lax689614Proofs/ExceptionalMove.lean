@@ -93,7 +93,7 @@ theorem exceptional_parity (φ : Formula) (hm : φ.clauses.length % 2 = 1)
   change (remove A Vertex.s (Vertex.a j)).image label =
     remove (A.image label) Construction.s (Construction.a φ j) at hrem
   rw [← hrem, winning_image (vertexGraph φ) (Construction.graph φ) label
-    (label_injective φ) label_adj, losing_iff_zero,
+    (label_injective φ) label_adj, GrundyProperties.losing_iff_zero,
     exceptional_value A (regular_invariant A hA) j hex hm hr]
 
 end Lax689614Proofs

@@ -29,9 +29,10 @@ theorem false_simulation {φ : Formula} (hm : φ.clauses.length % 2 = 1)
       obtain ⟨hrD, hkD, hpD⟩ := false_resources_after_regular heff hr hk hp
       by_cases hex : ∃ j : Fin φ.clauses.length, ∀ i ∈ φ.clauses[j], Vertex.f i ∉ D
       · obtain ⟨j, hj⟩ := hex
-        apply winning_of_zero_reply (vertexGraph φ) D .s (.a j) hDI.s_mem (hDI.a_mem j)
-        · exact (adj_s (.a j)).mpr (Or.inr (Or.inl ⟨j, rfl⟩))
-        · rw [exceptional_value D hDI j hj hm (by omega), hpD]
+        apply (winning_iff_move _ D).mpr
+        refine ⟨.s, hDI.s_mem, .a j, hDI.a_mem j,
+          (adj_s (.a j)).mpr (Or.inr (Or.inl ⟨j, rfl⟩)), ?_⟩
+        exact (regular_exceptional_losing D hD hm (by omega) j hj).mpr hpD
       · have hne : pending D ≠ ∅ := by
           intro hempty
           apply hex
@@ -75,14 +76,14 @@ theorem false_simulation {φ : Formula} (hm : φ.clauses.length % 2 = 1)
     · by_cases hx : vertexExceptional S u w
       · obtain ⟨j, hsame, hj⟩ := hx
         rcases hsame with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩
-        · apply winning_of_value_ne_zero
-          rw [exceptional_value S hInv j hj hm (by omega), hp]
-          decide
+        · by_contra hl
+          have hz := (regular_exceptional_losing S hS hm (by omega) j hj).mp hl
+          omega
         · rw [remove_swap]
-          apply winning_of_value_ne_zero
-          rw [exceptional_value S hInv j hj hm (by omega), hp]
-          decide
-      · exact vertex_deviation_wins S hInv hm (by omega) (by omega) u w he hreg hx
+          by_contra hl
+          have hz := (regular_exceptional_losing S hS hm (by omega) j hj).mp hl
+          omega
+      · exact regular_deviation_wins S hS hm (by omega) (by omega) u w hu hw he hreg hx
 
 /--
 ---

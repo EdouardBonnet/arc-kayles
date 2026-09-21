@@ -63,16 +63,16 @@ theorem reduceWord_length_bound (w : List Bool) :
     (reduceWord w).length ≤ (17 * w.length + 22) ^ 2 + (17 * w.length + 22) + 1 := by
   classical
   cases hp : parseFormula w with
-  | none => simp [reduceWord, hp, graph_length, noGraph]
+  | none => simp [reduceWord, hp, Sizes.graph_length, noGraph]
   | some φ =>
     have hw := parseFormula_sound hp
-    have hlen := formula_length φ
+    have hlen := Sizes.formula_length φ
     rw [hw] at hlen
     by_cases hc : φ.clauses = []
-    · simp [reduceWord, hp, hc, graph_length, yesGraph]
+    · simp [reduceWord, hp, hc, Sizes.graph_length, yesGraph]
       nlinarith [sq_nonneg (17 * (w.length : ℤ) + 22)]
-    · simp only [reduceWord, hp, hc, ↓reduceIte, graph_length, Construction.labeledGraph]
-      have hcsize := construction_size (oddify φ)
+    · simp only [reduceWord, hp, hc, ↓reduceIte, Sizes.graph_length, Construction.labeledGraph]
+      have hcsize := Sizes.construction_size (oddify φ)
       have hodd := oddify_size φ
       change Construction.size (oddify φ) =
         13 * φ.nvars + 4 * (oddify φ).clauses.length + 18 at hcsize

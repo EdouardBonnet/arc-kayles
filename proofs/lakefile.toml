@@ -27,3 +27,9 @@ name = "Lax429075Proofs"
 git = "https://github.com/EdouardBonnet/cook-levin"
 rev = "905f2da2698d5b38002676f74632aa716e731389"
 subDir = "proofs"
+
+[[require]]
+name = "Lax429075"
+git = "https://github.com/EdouardBonnet/cook-levin"
+rev = "905f2da2698d5b38002676f74632aa716e731389"
+subDir = "concepts"

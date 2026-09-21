@@ -7,12 +7,12 @@ open Lax689614 PositiveCNF ArcKayles Grundy Biclique
 theorem winning_of_value_ne_zero {V : Type} [DecidableEq V] (G : SimpleGraph V)
     (S : Finset V) (h : value G S ≠ 0) : Winning G S := by
   by_contra hn
-  exact h ((losing_iff_zero G S).mp hn)
+  exact h ((GrundyProperties.losing_iff_zero G S).mp hn)
 
 theorem winning_of_zero_reply {V : Type} [DecidableEq V] (G : SimpleGraph V)
     (S : Finset V) (u v : V) (hu : u ∈ S) (hv : v ∈ S) (he : G.Adj u v)
     (hz : value G (remove S u v) = 0) : Winning G S :=
-  (winning_iff_move G S).mpr ⟨u, hu, v, hv, he, (losing_iff_zero G _).mpr hz⟩
+  (winning_iff_move G S).mpr ⟨u, hu, v, hv, he, (GrundyProperties.losing_iff_zero G _).mpr hz⟩
 
 theorem high_xor_nonzero (a k : ℕ) (ha : a = 2 ∨ a = 3) : Nat.xor a (k % 2) ≠ 0 := by
   have hk : k % 2 = 0 ∨ k % 2 = 1 := by omega

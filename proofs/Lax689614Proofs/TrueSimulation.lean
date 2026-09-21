@@ -57,7 +57,7 @@ theorem true_simulation {φ : Formula} (hm : φ.clauses.length % 2 = 1)
       · rcases hcounts with h | h <;> omega
       · rcases hcounts with h | h <;> omega
       · rfl
-    · apply vertex_deviation_wins D hDI hm (by omega) (by omega) x z hxe hxreg
+    · apply regular_deviation_wins D hD hm (by omega) (by omega) x z hx hz hxe hxreg
       rintro ⟨j, _, hj⟩
       obtain ⟨k, hk, hkf⟩ := cnf_winning_no_exhausted D hD false hcnfD j
       exact hj k hk hkf

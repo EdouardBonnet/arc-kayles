@@ -109,7 +109,7 @@ theorem core_value {φ : Formula} (S : Finset (Vertex φ)) (Q : Finset (Fin φ.c
     (ho : ∀ j, Vertex.b j ∈ S → j ∉ Q →
       Vertex.a j ∉ S ∧ ∀ i ∈ φ.clauses[j], Vertex.f i ∉ S) :
     value (vertexGraph φ) (core S) = g Q.card (liveV S).card := by
-  have h := biclique_value (vertexGraph φ) _ _ _ _ (core_partition S Q hs hQ hv ho)
+  have h := Biclique.value_eq (vertexGraph φ) _ _ _ _ (core_partition S Q hs hQ hv ho)
   simpa only [coreB, coreV,
     Finset.card_image_of_injective Q (fun _ _ h => Vertex.b.inj h),
     Finset.card_image_of_injective (liveV S) (fun _ _ h => Vertex.v.inj h)] using h
@@ -145,7 +145,7 @@ theorem tail_value {φ : Formula} (S : Finset (Vertex φ))
       refine ⟨.z i, Finset.mem_image_of_mem _ hi, (adj_y i (.z i)).mpr (Or.inr rfl), ?_⟩
       intro w _ he
       exact (adj_z i w).mp he
-  have h := biclique_value (vertexGraph φ) _ _ _ _ hpart
+  have h := Biclique.value_eq (vertexGraph φ) _ _ _ _ hpart
   simpa [g, Finset.card_image_of_injective (liveY S) (fun _ _ h => Vertex.y.inj h)] using h
 
 theorem core_tail_union {φ : Formula} (S : Finset (Vertex φ)) : core S ∪ tail S = S := by
@@ -159,7 +159,7 @@ theorem split_value {φ : Formula} (S : Finset (Vertex φ))
     value (vertexGraph φ) S = Nat.xor (value (vertexGraph φ) (core S))
       (value (vertexGraph φ) (tail S)) := by
   conv_lhs => rw [← core_tail_union S]
-  apply disjoint_union
+  apply GrundyProperties.disjoint_union
   · apply Finset.disjoint_left.mpr
     intro x hx hx'
     exact (Finset.mem_filter.mp hx).2 (Finset.mem_filter.mp hx').2

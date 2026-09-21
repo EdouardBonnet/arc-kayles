@@ -59,10 +59,10 @@ theorem reduction_correct_nonempty (φ : Formula) (hm : φ.clauses ≠ []) :
   constructor
   · intro hw
     by_contra hn
-    exact false_strategy (oddify φ) (oddify_odd φ hm)
+    exact Reduction.false_strategy (oddify φ) (oddify_odd φ hm)
       (fun ht => hn ((oddify_firstWins φ).mp ht)) hw
   · intro ht
-    exact true_strategy (oddify φ) (oddify_odd φ hm) ((oddify_firstWins φ).mpr ht)
+    exact Reduction.true_strategy (oddify φ) (oddify_odd φ hm) ((oddify_firstWins φ).mpr ht)
 
 theorem labeled_graph_correct (φ : Formula) :
     Winning (Construction.labeledGraph φ).graph Finset.univ ↔

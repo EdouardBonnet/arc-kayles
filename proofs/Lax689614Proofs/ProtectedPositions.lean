@@ -78,7 +78,7 @@ theorem tail_value_of_protected {φ : Formula} (S : Finset (Vertex φ))
       · exact Finset.mem_image_of_mem _ (Finset.mem_filter.mpr ⟨Finset.mem_univ _, hp i hiS⟩)
       · intro w _ he
         exact (adj_z i w).mp he
-  have h := biclique_value (vertexGraph φ) _ _ _ _ hpart
+  have h := Biclique.value_eq (vertexGraph φ) _ _ _ _ hpart
   simpa [g, Finset.card_image_of_injective (liveY S) (fun _ _ h => Vertex.y.inj h)] using h
 
 theorem protected_value {φ : Formula} (S : Finset (Vertex φ)) (h : Protected S)

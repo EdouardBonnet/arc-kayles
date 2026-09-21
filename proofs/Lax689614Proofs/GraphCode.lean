@@ -70,7 +70,7 @@ theorem rawGraphWord_correct (φ : PositiveCNF.Formula) :
       rawEdge_construction, Fin.val_inj]
     exact and_congr_left (fun _ => not_congr Fin.val_injective.eq_iff.symm)
   simp only [rawGraphWord, Encoding.graphWord, Construction.labeledGraph]
-  rw [← construction_size φ]
+  rw [← Sizes.construction_size φ]
   rw [← map_finRange_val (Construction.size φ)]
   simp only [List.flatMap_map, List.map_map, Function.comp_def]
   congr 2

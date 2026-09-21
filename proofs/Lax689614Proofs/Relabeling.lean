@@ -42,7 +42,7 @@ theorem winning_image {V W : Type} [DecidableEq V] [DecidableEq W]
   classical
   have h := value_image G H f hf he S
   have hnot : ¬ Winning H (S.image f) ↔ ¬ Winning G S := by
-    rw [losing_iff_zero, losing_iff_zero, h]
+    rw [GrundyProperties.losing_iff_zero, GrundyProperties.losing_iff_zero, h]
   exact not_iff_not.mp hnot
 
 end Lax689614Proofs

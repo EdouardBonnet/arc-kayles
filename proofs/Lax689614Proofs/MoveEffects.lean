@@ -98,11 +98,11 @@ theorem false_after_regular {φ : Formula} {S D : Finset (Vertex φ)} (h : Regul
   | passV hU hT hr hk =>
     rw [hU, hT]
     intro hw'
-    exact hw ((cnf_strategy_stealing φ _ _).2.2 hw')
+    exact hw (cnf_turn_from_pass φ _ _ (pending_true_disjoint S) hw')
   | passY hU hT hr hk =>
     rw [hU, hT]
     intro hw'
-    exact hw ((cnf_strategy_stealing φ _ _).2.2 hw')
+    exact hw (cnf_turn_from_pass φ _ _ (pending_true_disjoint S) hw')
 
 theorem effect_satisfied {φ : Formula} {S D : Finset (Vertex φ)} (h : RegularEffect S D)
     (hs : Satisfied φ (trueVars S)) : Satisfied φ (trueVars D) := by
@@ -132,8 +132,8 @@ theorem true_after_regular {φ : Formula} {S D : Finset (Vertex φ)} (h : Regula
   | setFalse i hi hU hT hr hk =>
     rw [hU, hT]
     exact (cnf_false φ _ _ (Finset.nonempty_iff_ne_empty.mp ⟨i, hi⟩)).mp hw i hi
-  | passV hU hT hr hk => rw [hU, hT]; exact (cnf_strategy_stealing φ _ _).2.2 hw
-  | passY hU hT hr hk => rw [hU, hT]; exact (cnf_strategy_stealing φ _ _).2.2 hw
+  | passV hU hT hr hk => rw [hU, hT]; exact cnf_turn_from_pass φ _ _ (pending_true_disjoint S) hw
+  | passY hU hT hr hk => rw [hU, hT]; exact cnf_turn_from_pass φ _ _ (pending_true_disjoint S) hw
 
 theorem false_resources_after_regular {φ : Formula} {S D : Finset (Vertex φ)}
     (h : RegularEffect S D)

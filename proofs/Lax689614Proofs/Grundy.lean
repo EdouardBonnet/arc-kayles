@@ -106,10 +106,10 @@ theorem losing_iff_zero {V : Type} [DecidableEq V] (G : SimpleGraph V)
     constructor
     · intro hnot
       by_contra hne
-      obtain ⟨u, hu, v, hv, he, hz⟩ := smaller_reachable G S 0 (Nat.pos_of_ne_zero hne)
+      obtain ⟨u, hu, v, hv, he, hz⟩ := GrundyProperties.smaller_reachable G S 0 (Nat.pos_of_ne_zero hne)
       exact hnot ((winning_iff_move G S).mpr ⟨u, hu, v, hv, he, (child u v hu).mpr hz⟩)
     · intro hz hw
       obtain ⟨u, hu, v, hv, he, hl⟩ := (winning_iff_move G S).mp hw
-      exact value_not_reachable G S u v hu hv he ((child u v hu).mp hl |>.trans hz.symm)
+      exact GrundyProperties.value_not_reachable G S u v hu hv he ((child u v hu).mp hl |>.trans hz.symm)
 
 end Lax689614Proofs

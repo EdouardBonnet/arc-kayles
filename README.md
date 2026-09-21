@@ -2,7 +2,8 @@
 
 Local Lax submission **lax-689614**, based on Édouard Bonnet's manuscript
 `../main.pdf`. All theorem statements, including PSPACE-completeness, have
-Lean proofs. Nothing has been submitted to the remote archive or registered.
+Lean proofs. The source repository is
+[EdouardBonnet/arc-kayles](https://github.com/EdouardBonnet/arc-kayles).
 
 The submission uses the registered, pinned concept packages
 [classical complexity, lax-434930](https://github.com/EdouardBonnet/classical-complexity/tree/0c0840319318215fd7b36a9a822b81ce55cf6941)
@@ -13,10 +14,11 @@ machine on binary words.
 
 ## Proof status
 
-All seventeen proofs have passed full Lax validation and independent kernel
-replay, with empty computed assumption sets. There are no open theorem
-statements. The final hardness and completeness proofs use only `propext`,
-`Classical.choice`, and `Quot.sound`.
+All seventeen theorem statements are proved by an acyclic proof network.
+Downstream proofs use the corresponding concept-statement axioms, so Lax
+displays the mathematical dependencies instead of inlining their proofs.
+Each such premise has its own verified proof, locally or in a registered
+dependency; none is left open.
 
 | Paper result | Concept module | Status |
 | --- | --- | --- |
@@ -96,6 +98,21 @@ The final completeness proof composes these results using
 named `proof_wanted` declaration and unproved archived concept statements are
 not used as proof dependencies.
 
+## Proof-network checks
+
+The final completeness proof depends directly on the membership statement,
+positive-CNF hardness, and the polynomial reduction. The reduction depends on
+both strategy transfers; those use the pass and regular-play statements.
+The biclique, disjoint-union, and zero-value statements support the deviation
+and parity analysis. Positive-CNF hardness references the registered
+Cook–Levin gate-correctness statement.
+
+After building, run `node scripts/check-proof-network.mjs`. This checks the
+actual computed assumption sets, expected edges, absence of local cycles,
+and that all seventeen statements become proven under Lax's least-fixed-point
+rule, including supporting proofs from the local registered archive snapshot.
+An optional argument supplies a different archive database directory.
+
 Review entry points:
 
 - [Positive-CNF hardness](proofs/Lax689614Proofs/PositiveCNFHardness.lean)
@@ -116,6 +133,7 @@ From this directory:
 ```sh
 lax build .
 lax build . --replay
+node scripts/check-proof-network.mjs
 lax serve .
 ```
 
@@ -123,8 +141,14 @@ lax serve .
 statements, proofs, and exact computed assumption sets. No remote publication
 is needed for local validation and preview.
 
-Validation on 2026-09-21: `lax build . --replay` passed with 14 concepts and
-17 proofs, all with empty computed assumption sets. The build reports 139
-advisory warnings of the kinds explained above, and no errors.
+The modular proof-network build passes with 14 concepts and 17 proofs;
+`node scripts/check-proof-network.mjs` verifies all seventeen statements are
+proven, with no cycles and all expected edges. Independent kernel replay passes.
+Browser validation of an isolated preview with the registered dependencies
+confirms that all seventeen statements display as proven, the dependency edges
+render, and no graph labels are clipped. The full cached-archive preview is
+blocked by an unrelated archive entry's unsupported font glyphs.
+The build reports 138 advisory warnings of the kinds explained
+above, and no errors.
 The manuscript's SHA-256 is
 `94517c7d6ac1909f101e8485a0eb53fc0c7da415b8496c2950e532cea63b8ad0`.

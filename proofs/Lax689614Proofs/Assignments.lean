@@ -1,4 +1,4 @@
-import Lax689614Proofs.Deviations
+import Lax689614Proofs.StatementBridges
 import Lax689614Proofs.PositiveCNF
 
 namespace Lax689614Proofs

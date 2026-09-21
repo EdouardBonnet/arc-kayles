@@ -79,7 +79,7 @@ theorem satisfied_phase {φ : Formula} (S : Finset (Vertex φ)) (hS : VertexReac
         · rcases hcountE with h | h <;> omega
         · rw [liveB_regular E hEI, Finset.card_univ, Fintype.card_fin]
           rcases hcountE with h | h <;> omega
-    · apply vertex_deviation_wins D hDI hm hrD hkD x z hxe hxreg
+    · apply regular_deviation_wins D hD hm hrD hkD x z hx hz hxe hxreg
       rintro ⟨j, _, hj⟩
       obtain ⟨i, hi, hiT⟩ := hsat φ.clauses[j] (List.getElem_mem _)
       exact hj i hi (Finset.mem_filter.mp hiT).2.2

@@ -1,13 +1,13 @@
 import Lax689614Proofs.QuantifiedSizes
 import Lax429075Proofs.CircuitExtension
 import Lax429075Proofs.Tseitin
+import Lax429075.GateCorrect
 
 set_option backward.isDefEq.respectTransparency false
 
 namespace Lax689614Proofs.Quantified
 
 open Lax429075
-open Lax429075Proofs (gate_correct)
 
 def assignBlock (start n : ℕ) (v : Vector n) (a : CNF.Assignment) : CNF.Assignment :=
   fun j => if h : start ≤ j ∧ j < start + n then v ⟨j - start, by omega⟩ else a j
@@ -41,7 +41,7 @@ theorem fragmentCNF_eval (start : ℕ) (e : Lax429075Proofs.CircuitBuilder.Expr)
       Lax429075Proofs.CircuitBuilder.Satisfies start
         (Lax429075Proofs.CircuitBuilder.compile start e).gates a := by
   rw [fragmentCNF, Lax429075Proofs.eval_append, Lax429075Proofs.eval_flatMap]
-  simp only [Bool.and_eq_true, List.all_eq_true, gate_correct]
+  simp only [Bool.and_eq_true, List.all_eq_true, GateCorrect.correct]
   simp [CNF.eval, CNF.Literal.eval, Tseitin.positive,
     Lax429075Proofs.CircuitBuilder.Satisfies, Prod.forall]
 

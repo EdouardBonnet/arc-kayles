@@ -54,7 +54,7 @@ def signedWord {r : ℕ} (F : SignedCNF r) : List Bool := Encoding.formulaWord (
 
 theorem signedWord_length {r : ℕ} (F : SignedCNF r) :
     (signedWord F).length = 4 * r + F.length + 2 + F.length * (4 * r) := by
-  rw [signedWord, formula_length]
+  rw [signedWord, Sizes.formula_length]
   simp only [matrixFormula, List.length_map]
   omega
 

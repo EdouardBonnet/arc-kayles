@@ -73,22 +73,22 @@ theorem disjoint_union {V : Type} [DecidableEq V] (G : SimpleGraph V)
         change (value G (remove S u v) ^^^ value G T) ^^^ value G T =
           (value G S ^^^ value G T) ^^^ value G T at hc
         simp only [Nat.xor_xor_cancel_right] at hc
-        exact value_not_reachable G S u v huS hvS he hc
+        exact GrundyProperties.value_not_reachable G S u v huS hvS he hc
       · rw [rightChild u v huT hvT] at hh
         have hc := congrArg (fun x => Nat.xor (value G S) x) hh
         change value G S ^^^ (value G S ^^^ value G (remove T u v)) =
           value G S ^^^ (value G S ^^^ value G T) at hc
         simp only [Nat.xor_xor_cancel_left] at hc
-        exact value_not_reachable G T u v huT hvT he hc
+        exact GrundyProperties.value_not_reachable G T u v huT hvT he hc
     · intro i hi
       apply (option_mem G (S ∪ T) i).mpr
       rcases Nat.lt_xor_cases hi with hleft | hright
-      · obtain ⟨u, hu, v, hv, he, hh⟩ := smaller_reachable G S _ hleft
+      · obtain ⟨u, hu, v, hv, he, hh⟩ := GrundyProperties.smaller_reachable G S _ hleft
         refine ⟨u, Finset.mem_union_left T hu, v, Finset.mem_union_left T hv, he, ?_⟩
         rw [leftChild u v hu hv, hh]
         change (i ^^^ value G T) ^^^ value G T = i
         exact Nat.xor_xor_cancel_right _ _
-      · obtain ⟨u, hu, v, hv, he, hh⟩ := smaller_reachable G T _ hright
+      · obtain ⟨u, hu, v, hv, he, hh⟩ := GrundyProperties.smaller_reachable G T _ hright
         refine ⟨u, Finset.mem_union_right S hu, v, Finset.mem_union_right S hv, he, ?_⟩
         rw [rightChild u v hu hv, hh]
         change value G S ^^^ (i ^^^ value G S) = i
