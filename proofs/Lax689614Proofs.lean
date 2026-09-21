@@ -85,3 +85,13 @@ import Lax689614Proofs.InputExpressions
 import Lax689614Proofs.ConfigurationValidity
 import Lax689614Proofs.RestrictedConfigurationGraph
 import Lax689614Proofs.SpaceToQuantified
+import Lax689614Proofs.VariableFoldLayout
+import Lax689614Proofs.VariableFoldCode
+import Lax689614Proofs.UniformExpressions
+import Lax689614Proofs.UniformPatterns
+import Lax689614Proofs.StreamingBridge
+import Lax689614Proofs.DigitTable
+import Lax689614Proofs.UniformConfigurationSymbols
+import Lax689614Proofs.UniformPrefix
+import Lax689614Proofs.UniformInput
+import Lax689614Proofs.UniformValidation
