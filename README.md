@@ -78,9 +78,11 @@ requires LaTeX sources.
    Block-quantifier normalization and the complete closed-QBF-to-game semantic
    translation are also proved. The alternating-CNF-to-positive-CNF binary
    reduction has a compiled polynomial-time Turing-machine witness, including
-   malformed-input handling. Connecting polynomial-space configurations to
-   these formulas and compiling the preceding word transformations are still
-   required for PSPACE-hardness.
+   malformed-input handling. Encoded machine configurations are now connected
+   to the quantified formulas: `machineFormula_positive` proves that an
+   arbitrary space-bounded machine accepts exactly when the resulting game
+   is winning. Compiling this source-to-formula transformation with a
+   polynomial-time certificate is still required for PSPACE-hardness.
 2. Assemble completeness from positive CNF hardness, the proved reduction,
    and the proved PSPACE membership. Polynomial reduction composition is supplied
    by `Lax434930Proofs.PolynomialComposition.comp` in the registered classical

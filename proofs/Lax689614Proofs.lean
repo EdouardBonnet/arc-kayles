@@ -78,3 +78,10 @@ import Lax689614Proofs.ByskovTests
 import Lax689614Proofs.ByskovCode
 import Lax689614Proofs.ByskovWord
 import Lax689614Proofs.ByskovPolynomial
+import Lax689614Proofs.PatternExpressions
+import Lax689614Proofs.EncodedSymbols
+import Lax689614Proofs.ConfigurationExpressions
+import Lax689614Proofs.InputExpressions
+import Lax689614Proofs.ConfigurationValidity
+import Lax689614Proofs.RestrictedConfigurationGraph
+import Lax689614Proofs.SpaceToQuantified
