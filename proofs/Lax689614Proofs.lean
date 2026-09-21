@@ -30,3 +30,10 @@ import Lax689614Proofs.WordReduction
 import Lax689614Proofs.CodeComputer
 import Lax689614Proofs.UnaryCode
 import Lax689614Proofs.ParserLengths
+import Lax689614Proofs.FormulaHeader
+import Lax689614Proofs.MatrixBits
+import Lax689614Proofs.EdgeCode
+import Lax689614Proofs.GraphCode
+import Lax689614Proofs.NormalizeCode
+import Lax689614Proofs.HeaderCode
+import Lax689614Proofs.ReductionTime

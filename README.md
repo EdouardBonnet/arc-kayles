@@ -14,7 +14,7 @@ machine on binary words.
 
 ## Proof status
 
-All thirteen completed proofs have passed kernel replay and have empty Lax
+All fourteen completed proofs have passed kernel replay and have empty Lax
 assumption sets: they use only the archive's allowed background axioms, not
 any open concept statements.
 
@@ -28,7 +28,7 @@ any open concept statements.
 | Claim 7: deviations lose | `RegularPlay` | Proved |
 | Claim 8: exceptional move parity | `RegularPlay` | Proved |
 | Claims 9 and 10: transfer winning strategies | `Reduction` | Both proved |
-| Polynomial-time many-one reduction | `Reduction` | Statement only |
+| Polynomial-time many-one reduction | `Reduction` | Proved with a compiled Turing-machine witness |
 | Schaefer's positive CNF hardness | `PositiveCNFHardness` | Statement only |
 | Theorem 1: membership and completeness | `Completeness` | Statements only |
 | Exact encoding lengths and reduction vertex count | `Sizes` | All three proved |
@@ -64,17 +64,12 @@ requires LaTeX sources.
 
 ## Remaining proof work
 
-1. Supply the actual `TM2ComputableInPolyTime` witness for `reduceWord`.
-   Total formula parsing, encoding injectivity, clause duplication,
-   the empty-conjunction and invalid-word cases, winner preservation on all
-   binary words, and a quadratic output-length bound are now proved.
-   The size bound does not by itself establish polynomial running time.
-2. Prove positive CNF hardness from polynomial-space computation, e.g. through
+1. Prove positive CNF hardness from polynomial-space computation, e.g. through
    quantified formulas and Schaefer's strategy-preserving construction.
    Cook–Levin provides reductions and useful encodings, but NP-hardness alone
    does not supply this alternating-game argument. No corresponding archived
    QBF/positive-CNF hardness theorem was found in the local archive snapshot.
-3. Implement the polynomial-space game-tree decider in the imported
+2. Implement the polynomial-space game-tree decider in the imported
    `SpaceMachines` model and prove its work-space bound. Prove any needed
    assembly of completeness. Polynomial reduction composition is supplied
    by `Lax434930Proofs.PolynomialComposition.comp` in the registered classical
@@ -84,7 +79,10 @@ requires LaTeX sources.
 These steps remain part of the requested full formalization. The present
 proof package completes the Sprague–Grundy results, the pass lemma, the
 deviation analysis, and both strategy transfers, including True's endgame.
-The complexity theorem remains open.
+The binary-word reduction also has a genuine polynomial-time machine
+witness, compiled from header validation, clause normalization, and matrix
+generation. The PSPACE membership and positive-CNF hardness proofs remain
+open; completeness will then follow by the proved reduction-composition lemma.
 
 ## Validation and preview
 
@@ -101,6 +99,7 @@ statements, proofs, and exact computed assumption sets. No remote publication
 is needed for local validation and preview.
 
 Validation on 2026-09-21: `lax build . --replay` passed with 14 concepts and
-thirteen proofs, all with empty computed assumption sets. This includes
-both strategy-transfer proofs. There are four open statements. The manuscript's SHA-256 is
+fourteen proofs, all with empty computed assumption sets. This includes
+both strategy transfers and the polynomial-time reduction. There are three
+open statements. The manuscript's SHA-256 is
 `94517c7d6ac1909f101e8485a0eb53fc0c7da415b8496c2950e532cea63b8ad0`.
