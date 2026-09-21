@@ -69,3 +69,12 @@ import Lax689614Proofs.ByskovTail
 import Lax689614Proofs.ByskovLayers
 import Lax689614Proofs.AlternatingCNF
 import Lax689614Proofs.ByskovReduction
+import Lax689614Proofs.QuantifierNormalization
+import Lax689614Proofs.AlternatingNormalization
+import Lax689614Proofs.QuantifiedPositiveCNF
+import Lax689614Proofs.ByskovEncoding
+import Lax689614Proofs.ByskovMatrix
+import Lax689614Proofs.ByskovTests
+import Lax689614Proofs.ByskovCode
+import Lax689614Proofs.ByskovWord
+import Lax689614Proofs.ByskovPolynomial

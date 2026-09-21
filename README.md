@@ -75,8 +75,12 @@ requires LaTeX sources.
    pinned Cook–Levin circuit proofs, and Byskov's full strategy-preserving
    reduction from alternating quantified CNF to the True-first positive CNF
    game. Its round proof handles all deviations and composes across rounds.
-   Connecting polynomial-space configurations to these formulas and compiling
-   the remaining word transformations are still required for PSPACE-hardness.
+   Block-quantifier normalization and the complete closed-QBF-to-game semantic
+   translation are also proved. The alternating-CNF-to-positive-CNF binary
+   reduction has a compiled polynomial-time Turing-machine witness, including
+   malformed-input handling. Connecting polynomial-space configurations to
+   these formulas and compiling the preceding word transformations are still
+   required for PSPACE-hardness.
 2. Assemble completeness from positive CNF hardness, the proved reduction,
    and the proved PSPACE membership. Polynomial reduction composition is supplied
    by `Lax434930Proofs.PolynomialComposition.comp` in the registered classical
