@@ -6,12 +6,18 @@ title: "Arc Kayles is PSPACE-complete"
 authors:
   - name: Édouard Bonnet
     github: EdouardBonnet
+  - name: gpt-6-astra
 bibEntries:
   - |
-    @unpublished{bonnetArcKayles,
+    @misc{bonnetArcKayles,
       author = {Édouard Bonnet},
       title = {Arc Kayles is PSPACE-complete},
-      note = {Manuscript supplied as main.pdf}
+      year = {2026},
+      eprint = {2609.23777},
+      archivePrefix = {arXiv},
+      primaryClass = {cs.CC},
+      doi = {10.48550/arXiv.2609.23777},
+      url = {https://arxiv.org/abs/2609.23777}
     }
   - |
     @article{schaefer1978,
